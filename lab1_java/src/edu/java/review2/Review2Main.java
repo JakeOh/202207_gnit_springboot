@@ -14,10 +14,35 @@ public class Review2Main {
 		
 		// 조건문(conditional statement)
 		int number = 11;
+		if (number % 2 == 0) { // number를 2로 나눈 나머지가 0과 같으면(짝수이면)
+			System.out.println("짝수");
+		} else { // 그렇지 않으면(짝수가 아니면, 홀수이면)
+			System.out.println("홀수");
+		}
+		System.out.println("if-else end");
+		
 		if (number % 2 == 0) {
 			System.out.println("짝수");
+		}
+		System.out.println("if-else end");
+		
+		number = 0;
+		if (number > 0) {
+			System.out.println("양수");
+		} else if (number < 0) {
+			System.out.println("음수");
 		} else {
-			System.out.println("홀수");
+			System.out.println("영");
+		}
+		
+		if (number > 0) {
+			System.out.println("positive number");
+		} else {
+			if (number < 0) {
+				System.out.println("negative number");
+			} else {
+				System.out.println();
+			}
 		}
 		
 	}
