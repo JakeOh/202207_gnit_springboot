@@ -14,7 +14,7 @@ package edu.java.review5;
 public class Review5Main {
 	
 	public static void main(String[] args) {
-		// Employee 클래스의 객체를 생성 -> 인스턴스
+		// Employee 클래스의 객체를 생성(instantiate) -> 인스턴스
 		Employee emp1 = new Employee();  // 기본 생성자 호출
 		System.out.println(emp1);
 		System.out.println(emp1.empNo);
@@ -35,6 +35,11 @@ public class Review5Main {
 		
 		emp1.printEmpInfo();
 		
+		Employee emp3 = new Employee(3);
+		emp3.printEmpInfo();
+		
+		Employee emp4 = new Employee(4, "오쌤");
+		emp4.printEmpInfo();
 	}
 
 }

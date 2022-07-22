@@ -10,7 +10,7 @@ public class Employee {
 	// 자바 컴파일러가 기본 생성자(default constructor)를 자동으로 만들어 줌.
 	// 기본 생성자: 모든 필드를 기본값(0, 0.0, false, null)로 초기화하는 생성자.
 	// 생성자의 이름은 클래스의 이름과 동일.
-	// 생성자는 리턴 타입을 갖지 않음!
+	// 생성자는 리턴 타입을 갖지 않음! void도 사용하지 않음!
 	
 	// 기본 생성자. argument를 갖지 않는 생성자.
 	public Employee() {}
@@ -20,6 +20,19 @@ public class Employee {
 		this.empNo = empNo;
 		this.empName = empName;
 		this.salary = salary;
+	}
+	
+	public Employee(int empNo) {
+//		this.empNo = empNo;
+//		this.empName = null;
+//		this.salary = 0.0;
+		
+		// 같은 클래스의 다른 생성자를 호출
+		this(empNo, null, 0);
+	}
+	
+	public Employee(int empNo, String empName) {
+		this(empNo, empName, 0);
 	}
 	
 	// parameter(매개변수): 생성자 또는 메서드에서 argument를 저장하기 위해 선언하는 변수.
