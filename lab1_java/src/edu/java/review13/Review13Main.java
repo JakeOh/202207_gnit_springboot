@@ -33,6 +33,7 @@ public class Review13Main {
 		Outer.Inner inner1 = outer.new Inner(3);
 		inner1.printInner();
 		
+		// import문이 있기 때문에 Outer.Inner를 간단히 Inner로 쓸 수 있음.
 		Inner inner2 = outer.inner(5);
 		
 		// 3. static 내부 클래스 객체 생성
@@ -40,6 +41,7 @@ public class Review13Main {
 		EnclosingCls.NestedCls nested = new EnclosingCls.NestedCls("abc");
 		nested.test();
 		
+		// import 문이 있기 때문에 NestedCls라고 간단히 쓸 수 있음. 
 		NestedCls nested2 = new NestedCls("TEST");
 		
 		// 4. 지역 내부 클래스 - 메서드 안에서 선언하는 클래스
@@ -52,6 +54,31 @@ public class Review13Main {
 		SaveButton btn = new SaveButton();
 		btn.click();
 		
+		// 5. 익명 클래스(anonymous class)
+		// 부모(super) 타입으로 생성자를 호출하면서 클래스를 정의하는 것.
+		// 클래스 정의와 객체 생성을 동시에. 
+		Button btnFileOpen = new Button() {
+			@Override
+			public void click() {
+				System.out.println("파일 열기");
+			}
+		};
+		btnFileOpen.click();
+		
+		// test 메서드 호출
+		test("내부 클래스 테스트", new SaveButton());
+		test("익명 클래스 테스트", new Button() {
+			@Override
+			public void click() {
+				System.out.println("파일 저장");
+			}
+		});
+		
+	}
+	
+	private static void test(String desc, Button btn) {
+		System.out.println(desc);
+		btn.click();
 	}
 	
 }
