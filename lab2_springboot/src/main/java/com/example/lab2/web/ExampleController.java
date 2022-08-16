@@ -3,7 +3,10 @@ package com.example.lab2.web;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.example.lab2.dto.ExampleRequestDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,7 +25,7 @@ public class ExampleController {
 		return "/example/ex1";
 	}
 	
-	@GetMapping("/ex2")
+	@PostMapping("/ex2")
 	public String ex2(@RequestParam String userName,
 			@RequestParam(name = "userAge") Integer age,
 			Model model) {
@@ -39,6 +42,29 @@ public class ExampleController {
 		model.addAttribute("userAge", age);
 		
 		return "/example/ex2";
+	}
+	
+	@GetMapping("/ex3")
+	public String ex3() {
+		log.info("ex3() 호출");
+		return "/example/ex3";
+	}
+	
+	@PostMapping("/ex4")
+	public String ex4(ExampleRequestDto dto, Model model) {
+		// DispatcherServlet이 컨트롤러 메서드를 호출할 때,
+		// 요청 파라미터들을 분석해서 ExampleRequestDto 객체를 생성하고
+		// argument로 전달해줌.
+		log.info("ex4(dto={})", dto);
+		
+		model.addAttribute("dto", dto);
+		
+		return "/example/ex4";
+	}
+	
+	@GetMapping("/ex5")
+	public String ex5() {
+		return "/example/ex5";
 	}
 	
 }

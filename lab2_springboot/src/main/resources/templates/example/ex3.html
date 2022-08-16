@@ -6,10 +6,12 @@
 </head>
 <body>
 
-    <h1>Spring Boot Example 1</h1>
+    <h1>Spring Boot Example 3</h1>
     
-    <form th:action="@{/ex2}" method="post">
+    <form method="post" th:action="@{/ex4}">
         <input type="text" name="userName" placeholder="Username" />
+        <br/>
+        <input type="password" name="userPwd" placeholder="Password" />
         <br/>
         <input type="number" name="userAge" placeholder="Age" />
         <br/>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Spring Boot</title>
+</head>
+<body>
+
+    <h1>Spring Boot Example 5</h1>
+    
+    <form th:action="@{/rest3}">
+        <input type="text" name="id" placeholder="ID" />
+        <input type="email" name="email" placeholder="Email" />
+        <input type="submit" value="제출" />
+    </form>
+
+</body>
+</html>
