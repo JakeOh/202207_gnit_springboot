@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Spring Boot</title>
+    <link rel="stylesheet" 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" 
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" 
+        crossorigin="anonymous">
+</head>
+
+<body>
+
+    <header th:fragment="header (title)"
+        class="jumbotron text-center">
+        <h1>Spring Boot App.</h1>
+        <h2 th:text="${title}"></h2>
+    </header>
+
+    <script th:fragment="jquery-js"
+        src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" 
+        integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" 
+        crossorigin="anonymous"></script>
+    <script th:fragment="bootstrap-js"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" 
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

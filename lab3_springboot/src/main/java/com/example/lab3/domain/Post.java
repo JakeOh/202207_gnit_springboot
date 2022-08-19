@@ -6,8 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.apache.el.parser.AstFalse;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

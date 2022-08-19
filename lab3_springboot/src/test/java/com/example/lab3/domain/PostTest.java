@@ -1,6 +1,7 @@
 package com.example.lab3.domain;
 
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -24,7 +25,9 @@ public class PostTest {
 		log.info(post.toString());
 		
 		// post 객체의 title 값이 지역변수 title의 값과 같으면 테스트 성공.
-		Assertions.assertEquals(title, post.getTitle());
+		assertEquals(title, post.getTitle());
+		assertEquals(content, post.getContent());
+		assertEquals(author, post.getAuthor());
 	}
 
 }
