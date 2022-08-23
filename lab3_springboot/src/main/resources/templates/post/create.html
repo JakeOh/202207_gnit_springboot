@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragment/bootstrap-frag :: head">
+</head>
+<body>
+
+<div th:replace="fragment/bootstrap-frag :: header ('새 포스트 작성')"></div>
+
+<nav>
+    <a th:href="@{/}" class="btn btn-secondary">메인</a>
+    <!-- TODO -->
+</nav>
+
+<div>
+    <form>
+        <div>
+            <input type="text" class="form-control" id="title"
+                placeholder="제목 입력" autofocus />
+        </div>
+        <div>
+            <textarea class="form-control" id="content"
+                placeholder="내용 입력"></textarea>
+        </div>
+        <div>
+            <input type="text" class="form-control" id="author"
+                placeholder="작성자 아이디" />
+        </div>
+    </form>
+    <div>
+        <a class="form-control btn btn-success"
+            id="btnComplete">작성 완료</a>
+    </div>
+</div>
+
+<div th:replace="fragment/bootstrap-frag :: jquery-js"></div>
+<div th:replace="fragment/bootstrap-frag :: bootstrap-js"></div>
+
+</body>
+</html>

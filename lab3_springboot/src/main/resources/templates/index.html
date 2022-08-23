@@ -5,6 +5,10 @@
 
     <div th:replace="fragment/bootstrap-frag :: header('메인 페이지')"></div>
 
+    <nav>
+        <a th:href="@{/post/create}"
+            class="btn btn-primary">새 글 작성</a>
+    </nav>
 
     <div th:replace="fragment/bootstrap-frag :: jquery-js"></div>
     <div th:replace="fragment/bootstrap-frag :: bootstrap-js"></div>

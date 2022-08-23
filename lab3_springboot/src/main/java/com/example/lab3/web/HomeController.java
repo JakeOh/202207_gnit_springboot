@@ -17,5 +17,11 @@ public class HomeController {
 		
 		return "index";
 	}
+	
+	@GetMapping("/post/create")
+	public String newPostPage() {
+		log.info("newPostPage() 호출");
+		return "/post/create";
+	}
 
 }
