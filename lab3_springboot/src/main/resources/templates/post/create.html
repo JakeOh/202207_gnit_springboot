@@ -34,6 +34,50 @@
 
 <div th:replace="fragment/bootstrap-frag :: jquery-js"></div>
 <div th:replace="fragment/bootstrap-frag :: bootstrap-js"></div>
+<script>
+$(document).ready(function() {
+	
+	// id="btnComplete" 링크가 클릭됐을 때 Ajax 요청 보내기
+	$("#btnComplete").click(function() {
+		// id="title" 입력상자의 값 읽기
+		const title = $("#title").val();
+		// id="content" textarea에 입력된 값 읽기
+		const content = $("#content").val();
+		// id="author" 입력상자의 값 읽기
+		const author = $('#author').val();
+		
+		if (title == '' || content == '' || author == '') {
+			alert('제목, 내용, 작성자 아이디는 반드시 입력');
+			return;
+		}
+		
+		// Ajax 요청을 사용할 때 보낼 데이터
+		const data = {
+				title: title,
+				content: content,
+				author: author,
+		};
+		// Ajax 요청 보내기
+		$.ajax({
+			url: '/api/post',
+			method: 'POST',
+			contentType: 'application/json; charset=UTF-8',
+			data: JSON.stringify(data),
+			// Ajax 요청에 대해서 성공 응답이 왔을 때 실행할 콜백 함수
+			success: function(data) {
+				alert(data + '포스트 작성 성공!');
+				location.href = '/'; // 메인 페이지로 이동
+			},
+			// Ajax 요청에 대해서 실패 응답이 왔을 때 실행할 콜백 함수
+			error: function(err) {
+				console.log(err);
+			},
+		});
+		
+	});
+	
+});
+</script>
 
 </body>
 </html>
