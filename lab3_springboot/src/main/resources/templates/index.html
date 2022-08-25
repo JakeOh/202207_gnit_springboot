@@ -10,6 +10,30 @@
             class="btn btn-primary">새 글 작성</a>
     </nav>
 
+    <div>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>수정시간</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="post : ${posts}">
+                    <td th:text="${post.id}">ID</td>
+                    <td>
+                        <a th:href="@{/post/read/{id}(id=${post.id})}"
+                            th:text="${post.title}">TITLE</a>
+                    </td>
+                    <td th:text="${post.author}">AUTHOR</td>
+                    <td th:text="${post.modifiedDate}">MODIFIED</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
     <div th:replace="fragment/bootstrap-frag :: jquery-js"></div>
     <div th:replace="fragment/bootstrap-frag :: bootstrap-js"></div>
 </body>
