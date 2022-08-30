@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.lab3.domain.Post;
 import com.example.lab3.domain.PostRepository;
@@ -34,6 +35,7 @@ public class PostService {
 		return entity.getId(); // 작성된 포스트의 글번호를 리턴.
 	}
 
+	@Transactional(readOnly = true)
 	public List<PostResponseDto> findAll() {
 		log.info("findAll() 호출");
 		
@@ -45,16 +47,29 @@ public class PostService {
 //		}
 //		return list;
 		
-		return postRepository.findByOrderByIdDesc().stream()
-				.map(post -> { return new PostResponseDto(post); })
-				.collect(Collectors.toList());
+		return postRepository.findByOrderByIdDesc() // List<Post> 타입을 리턴.
+				.stream() // 스트림 생성 - 매핑, 필터링, 수집, ...
+//				.map(post -> new PostResponseDto(post))
+				.map(PostResponseDto::new) // Post 객체를 PostResponseDto 객체로 매핑.
+				.collect(Collectors.toList()); // List 타입으로 수집.
 	}
 
+	// DB에서 검색(select)한 내용이 수정/삭제되지 않는 경우
+	// readOnly=true로 설정하면 검색 속도가 더 빨라짐.
+	@Transactional(readOnly = true)
 	public Post read(Long id) {
 		log.info("read(id={}) 호출", id);
 		return postRepository.findById(id)
 				.orElseThrow(() 
 						-> new IllegalArgumentException("해당 아이디 포스트 없음."));
+	}
+
+	public Long delete(Long id) {
+		log.info("delete(id={}) 호출", id);
+		
+		postRepository.deleteById(id); // id(PK)로 삭제.
+		
+		return id; // 삭제한 글번호를 리턴.
 	}
 	
 }

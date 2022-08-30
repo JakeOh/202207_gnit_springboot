@@ -6,8 +6,47 @@
 
 <div th:replace="fragment/bootstrap-frag :: header('상세보기 페이지')"></div>
 
-<!-- TODO: 메뉴 -->
-<!-- TODO: 읽은 포스트 내용 템플릿 -->
+<!-- 메뉴 -->
+<nav>
+    <a class="btn btn-secondary" th:href="@{/}">메인</a>
+    <a class="btn btn-info" th:href="@{/post/modify/{id}(id=${post.id})}">수정</a>
+</nav>
+
+<!-- 읽은 포스트 내용 템플릿 -->
+<div>
+    <form>
+        <div>
+            <label for="id" class="form-label">NO.</label>
+            <input id="id" type="text" class="form-control"
+                th:value="${post.id}" readonly />
+        </div>
+        <div>
+            <label for="title" class="form-label">제목</label>
+            <input id="title" type="text" class="form-control"
+                th:value="${post.title}" readonly />
+        </div>
+        <div>
+            <label for="content" class="form-label">내용</label>
+            <textarea id="content" class="form-control"
+                th:text="${post.content}" readonly></textarea>
+        </div>
+        <div>
+            <label for="author" class="form-label">작성자</label>
+            <input id="author" type="text" class="form-control"
+                th:value="${post.author}" readonly />
+        </div>
+        <div>
+            <label for="createdDate" class="form-label">작성 시간</label>
+            <input id="createdDate" type="text" class="form-control"
+                th:value="${post.createdDate}" readonly />
+        </div>
+        <div>
+            <label for="modifiedDate" class="form-label">수정 시간</label>
+            <input id="modifiedDate" type="text" class="form-control"
+                th:value="${post.modifiedDate}" readonly />
+        </div>
+    </form>
+</div>
 
 
 <div th:replace="fragment/bootstrap-frag :: jquery-js"></div>

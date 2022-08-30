@@ -52,4 +52,14 @@ public class HomeController {
 		return "/post/read";
 	}
 
+	@GetMapping("/post/modify/{id}")
+	public String modifyPostPage(@PathVariable Long id, Model model) {
+		log.info("modifyPostPage(id={}) 호출", id);
+		
+		Post post = postService.read(id);
+		model.addAttribute("post", post);
+		
+		return "/post/modify";
+	}
+	
 }
