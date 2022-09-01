@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.lab3.domain.Post;
 import com.example.lab3.dto.PostResponseDto;
@@ -60,6 +61,22 @@ public class HomeController {
 		model.addAttribute("post", post);
 		
 		return "/post/modify";
+	}
+	
+	@GetMapping("/post/search")
+	public String search(@RequestParam String type,
+			@RequestParam String keyword, 
+			Model model) {
+		log.info("search(type={}, keyword={})", type, keyword);
+		
+		// postService 메서드를 사용해서 검색 결과를 가져옴.
+		List<PostResponseDto> searchResult = 
+				postService.search(type, keyword);
+		
+		// 검색 결과를 model에 add를 해서 뷰(HTML template)로 전달.
+		model.addAttribute("posts", searchResult);
+		
+		return "index";
 	}
 	
 }

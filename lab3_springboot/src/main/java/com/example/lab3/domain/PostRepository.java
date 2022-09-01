@@ -15,4 +15,30 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 	// select * from posts order by id desc;
 	List<Post> findByOrderByIdDesc();
 	
+	// 검색에 필요한 메서드 signature 정의
+	// (1) 제목 검색
+	// select * from POSTS
+	// where lower(TITLE) like lower(?)
+	// order by ID desc;
+	List<Post> findByTitleContainingIgnoreCaseOrderByIdDesc(String title);
+	
+	// (2) 내용 검색
+	// select * from POSTS
+	// where lower(CONTENT) like lower(?)
+	// order by ID desc;
+	List<Post> findByContentContainingIgnoreCaseOrderByIdDesc(String content);
+	
+	// (3) 작성자 검색
+	// select * from POSTS
+	// where lower(AUTHOR) like lower(?)
+	// order by ID desc;
+	List<Post> findByAuthorContainingIgnoreCaseOrderByIdDesc(String author);
+
+	// (4) 제목+내용 검색
+	// select * from POSTS
+	// where lower(TITLE) like lower(?)
+	//    or lower(CONTENT) like lower(?)
+	// order by ID desc;
+	List<Post> findByTitleContainingIgnoreCaseOrContentContainingIgnoreCaseOrderByIdDesc(String title, String content);
+
 }

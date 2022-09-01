@@ -11,6 +11,7 @@ import com.example.lab3.domain.Post;
 import com.example.lab3.domain.PostRepository;
 import com.example.lab3.dto.PostCreateDto;
 import com.example.lab3.dto.PostResponseDto;
+import com.example.lab3.dto.PostUpdateDto;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -70,6 +71,56 @@ public class PostService {
 		postRepository.deleteById(id); // id(PK)로 삭제.
 		
 		return id; // 삭제한 글번호를 리턴.
+	}
+
+	@Transactional
+	public Post update(Long id, PostUpdateDto dto) {
+		log.info("update(id={}, dto={})", id, dto);
+		
+		// 포스트 번호 id(PK)로 DB에서 포스트를 검색.
+		Post entity = postRepository.findById(id).orElseThrow();
+		
+		// -> 검색된 포스트의 내용을 dto의 title과 content로 수정.
+		entity.update(dto);
+		
+		// 메서드 이름 앞에 @Transactional 애너테이션을 사용하면,
+		// postRepository의 save(entity) 메서드를 호출하지 않아도
+		// 트랜잭션이 끝나는 시점에 자동으로 DB에 저장됨.
+		
+		return entity;
+	}
+
+	@Transactional(readOnly = false)
+	public List<PostResponseDto> search(String type, String keyword) {
+		log.info("search(type={}, keyword={})", type, keyword);
+		
+		// 검색 타입에 따라서 서로 다른 쿼리(repository 메서드)를 호출.
+		List<Post> searchResult = null;
+		switch (type) {
+		case "t": // 제목 검색
+			searchResult = postRepository
+			.findByTitleContainingIgnoreCaseOrderByIdDesc(keyword);
+			break;
+		case "c": // 내용 검색
+			searchResult = postRepository
+			.findByContentContainingIgnoreCaseOrderByIdDesc(keyword);
+			break;
+		case "tc": // 제목+내용 검색
+			searchResult = postRepository
+			.findByTitleContainingIgnoreCaseOrContentContainingIgnoreCaseOrderByIdDesc(keyword, keyword);
+			break;
+		case "a": // 작성자 검색
+			searchResult = postRepository
+			.findByAuthorContainingIgnoreCaseOrderByIdDesc(keyword);
+			break;
+		default:
+			searchResult = new ArrayList<>();
+		}
+		
+		return searchResult // List<Post>
+				.stream() // Stream 객체 변환
+				.map(PostResponseDto::new) // Stream 반복하면서 Post -> PostResponseDto
+				.collect(Collectors.toList()); // mapping 결과를 List로 수집.
 	}
 	
 }

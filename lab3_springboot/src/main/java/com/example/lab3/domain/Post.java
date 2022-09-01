@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.example.lab3.dto.PostUpdateDto;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,6 +37,14 @@ public class Post extends BaseTimeEntity {
 		this.title = title;
 		this.content = content;
 		this.author = author;
+	}
+	
+	// 엔터티(의 제목, 내용)를 업데이트하기 위한 메서드.
+	public Post update(PostUpdateDto dto) {
+		this.title = dto.getTitle();
+		this.content = dto.getContent();
+		
+		return this;
 	}
 	
 }

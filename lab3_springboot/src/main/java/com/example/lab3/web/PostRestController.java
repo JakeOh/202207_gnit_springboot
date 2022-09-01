@@ -3,11 +3,14 @@ package com.example.lab3.web;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.lab3.domain.Post;
 import com.example.lab3.dto.PostCreateDto;
+import com.example.lab3.dto.PostUpdateDto;
 import com.example.lab3.service.PostService;
 
 import lombok.RequiredArgsConstructor;
@@ -44,6 +47,15 @@ public class PostRestController {
 		return postService.delete(id);
 	}
 	
-	// TODO: PutMapping
+	@PutMapping("/{id}")
+	public Post updatePost(@PathVariable Long id,
+			@RequestBody PostUpdateDto dto) {
+		log.info("updatePost(id={}, dto={})", id, dto);
+		
+		Post post = postService.update(id, dto);
+		
+		return post;
+	}
+	
 	
 }
