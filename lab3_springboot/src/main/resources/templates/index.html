@@ -6,6 +6,13 @@
     <div th:replace="fragment/bootstrap-frag :: header('메인 페이지')"></div>
 
     <nav>
+        <!-- TODO: 로그인 된 상태에서는 로그아웃 메뉴 -->
+        
+        <!-- TODO: 로그아웃 된 상태에서는 로그인, 회원가입 -->
+        <div>
+            <a class="btn btn-info" th:href="@{/user/signup}">회원가입</a>
+        </div>
+        
         <a th:href="@{/post/create}"
             class="btn btn-primary">새 글 작성</a>
     </nav>
