@@ -2,7 +2,9 @@ package com.example.lab3.service;
 
 import org.springframework.stereotype.Service;
 
+import com.example.lab3.domain.User;
 import com.example.lab3.domain.UserRepository;
+import com.example.lab3.dto.UserRegisterDto;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,5 +15,15 @@ import lombok.extern.slf4j.Slf4j;
 public class UserService {
 	
 	private final UserRepository userRepository;
+
+	public Long registerUser(UserRegisterDto dto) {
+		log.info("registerUser(dto={}) 호출", dto);
+		
+		// User 엔터티가 리포지터리에 저장되면 PK를 리턴.
+		User user = dto.toEntity();
+		userRepository.save(user);
+		
+		return user.getId();
+	}
 
 }

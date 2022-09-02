@@ -4,10 +4,23 @@
 <body>
     <div th:replace="fragment/bootstrap-frag :: header('회원가입 페이지')"></div>
     
-    <nav> <!-- TODO: 메뉴 -->
+    <nav> <!-- 메뉴 -->
+        <a class="btn btn-info" th:href="@{/}">메인</a>
     </nav>
     
-    <div> <!-- TODO: 회원가입 양식 -->
+    <div> <!-- 회원가입 양식 -->
+        <form method="post" th:action="@{/user/signup}"
+            class="form-group">
+            <input type="text" class="form-control"
+                name="username" placeholder="사용자 아이디"
+                autofocus required />
+            <input type="password" class="form-control"
+                name="password" placeholder="비밀번호" required />
+            <input type="email" class="form-control"
+                name="email" placeholder="이메일" required />
+            <input type="reset" value="취소" class="btn btn-secondary" />
+            <input type="submit" value="가입" class="btn btn-success" />
+        </form>
     </div>
     
     <div th:replace="fragment/bootstrap-frag :: jquery-js"></div>
