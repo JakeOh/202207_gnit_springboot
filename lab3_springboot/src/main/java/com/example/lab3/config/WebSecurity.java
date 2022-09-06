@@ -70,6 +70,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 		.and()
 //			.httpBasic() // 브라우저 기본 로그인 다이얼로그
 			.formLogin(Customizer.withDefaults()) // 스프링에서 제공하는 기본 로그인 UI
+			.logout() // 로그아웃 설정
+			.logoutSuccessUrl("/") // 로그아웃 성공했을 때 이동할 페이지
 		;
 	}
 

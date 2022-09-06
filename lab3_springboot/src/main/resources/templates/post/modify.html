@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head th:insert="fragment/bootstrap-frag :: head">
 </head>
 <body>
@@ -8,9 +9,12 @@
 
 <!-- 메뉴 -->
 <nav>
+    <div sec:authorize="isAuthenticated()"> <!-- 로그인 상태 -->
+        <span sec:authentication="name"></span>
+        <a class="btn btn-light" th:href="@{/logout}">로그아웃</a>
+    </div>
     <a class="btn btn-secondary" th:href="@{/}">메인</a>
     <a class="btn btn-info" th:href="@{/post/read/{id}(id=${post.id})}">상세보기</a>
-
 </nav>
 
 <!-- 읽은 포스트 내용 템플릿 -->
@@ -38,7 +42,8 @@
         </div>
     </form>
 </div>
-<div>
+<!-- 로그인한 사용자와 글 작성자가 같을 때 -->
+<div th:if="${#authentication.name} == ${post.author}">
     <button class="btn btn-danger" id="btnDelete">삭제</button>
     <button class="btn btn-success" id="btnUpdate">수정 완료</button>
 </div>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head th:insert="fragment/bootstrap-frag :: head">
 </head>
 <body>
@@ -7,8 +8,11 @@
 <div th:replace="fragment/bootstrap-frag :: header ('새 포스트 작성')"></div>
 
 <nav>
+    <div sec:authorize="isAuthenticated()"> <!-- 로그인 상태 -->
+        <span sec:authentication="name">로그인된 사용자 이름</span>
+        <a class="btn btn-light" th:href="@{/logout}">로그아웃</a>
+    </div>
     <a th:href="@{/}" class="btn btn-secondary">메인</a>
-    <!-- TODO -->
 </nav>
 
 <div>
@@ -22,8 +26,9 @@
                 placeholder="내용 입력"></textarea>
         </div>
         <div>
+            <!-- 로그인한 사용자 이름으로 자동으로 채우고 읽기 전용으로 설정. -->
             <input type="text" class="form-control" id="author"
-                placeholder="작성자 아이디" />
+                th:value="${#authentication.name}" readonly />
         </div>
     </form>
     <div>
