@@ -7,4 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 // 기본적인 CRUD 메서드들을 가지고 있는 Repository 객체가 됨.
 public interface UserRepository extends JpaRepository<User, Long> {
 
+	// select * from USERS where USERNAME = ?;
+	User findByUsername(String username);
+
 }

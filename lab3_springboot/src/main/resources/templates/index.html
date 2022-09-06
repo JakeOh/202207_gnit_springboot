@@ -1,15 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <head th:insert="fragment/bootstrap-frag :: head"></head>
 <body>
 
     <div th:replace="fragment/bootstrap-frag :: header('메인 페이지')"></div>
 
     <nav>
-        <!-- TODO: 로그인 된 상태에서는 로그아웃 메뉴 -->
+        <!-- 로그인 된 상태에서는 로그아웃 메뉴 -->
+        <div sec:authorize="isAuthenticated()">
+            <span sec:authentication="name">LOGIN USERNAME</span>
+            <a class="btn btn-light" th:href="@{/logout}">로그아웃</a>
+        </div>
         
-        <!-- TODO: 로그아웃 된 상태에서는 로그인, 회원가입 -->
-        <div>
+        <!-- 로그아웃 된 상태에서는 로그인, 회원가입 -->
+        <div sec:authorize="isAnonymous()">
+            <a class="btn btn-info" th:href="@{/login}">로그인</a>
             <a class="btn btn-info" th:href="@{/user/signup}">회원가입</a>
         </div>
         
